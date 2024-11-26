@@ -785,4 +785,14 @@ async def stop(ctx):
         with open(f'var/char{i}.txt', 'w') as f:
             f.write('')
 
+
+@bot.command()
+async def score(ctx):
+    user_id = str(ctx.author.id)
+    score_file = f'var/leaderboard/{user_id}.json'
+    with open(score_file, 'r') as f:
+        score = json.load(f)
+
+    await ctx.reply(f'Your score is {score}')
+
 bot.run(token)
