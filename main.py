@@ -4,6 +4,7 @@ import asyncio
 import os
 import glob
 import json
+import time
 
 from config import *
 
@@ -16,6 +17,14 @@ async def on_ready():
     status = "False"
     with open('var/status.txt', 'w') as f:
         f.write(status)
+
+    for i in range(1,11):
+        with open(f'var/char{i}.txt', 'w') as f:
+            f.write('')
+    
+    files = glob.glob('var/lives/*')
+    for f in files:
+        os.remove(f)
         
     print('Logged in as')
     print(bot.user.name)
@@ -153,7 +162,7 @@ async def set_word(ctx, word: str):
         with open('var/char10.txt', 'w') as f:
             f.write(word[9])
     
-    await ctx.send(f'Word was set to {word} with lenght of {length}')
+    await ctx.send(f'Word was set to {word}')
 
 @bot.command()
 async def g(ctx, gword: str):
@@ -339,7 +348,7 @@ async def g(ctx, gword: str):
             await ctx.reply(embed=embed3)
             success = True
         if gword == word:
-            await ctx.message.add_reaction('✔️')
+            await ctx.message.add_reaction('🏆')
 
             status = "False"
             with open('var/status.txt', 'w') as f:
@@ -354,9 +363,43 @@ async def g(ctx, gword: str):
                     f.write('')
         
             user = ctx.author.display_name
-            embed4 = discord.Embed(title="Hangman Ended", description=f"{user} guessed the correct word and won, the correct word was {word}", color=0x6F8FAF)
-            await ctx.reply(embed=embed4)
             success = True
+
+            score_file = f'var/leaderboard/{user_id}.json'
+            if not os.path.isfile(score_file):
+                with open(score_file, 'w') as f:
+                    json.dump(0, f)
+            with open(score_file, 'r') as f:
+                score = json.load(f)
+            
+            score = score + 1
+
+            with open(score_file, 'w') as f:
+                json.dump(score, f)
+
+            embed4 = discord.Embed(title="Hangman Ended", description=f"{user} guessed the correct word and won, the correct word was {word}.\nYou now have a score of {score}", color=0x6F8FAF)
+            await ctx.reply(embed=embed4)
+
+            leaderboard_files = glob.glob('var/leaderboard/*.json')
+            file_count = len(leaderboard_files)
+            scores = []
+
+            if file_count < 3:
+                for file in leaderboard_files:
+                    with open(file, 'r') as f:
+                        score = json.load(f)
+                        file_name = os.path.splitext(os.path.basename(file))[0]
+                        scores.append((file_name, score))
+
+                top_scores = sorted(scores, key=lambda x: x[1], reverse=True)[:3]
+
+                top1_name, top1_score = top_scores[0] if len(top_scores) > 0 else (None, None)
+                top2_name, top2_score = top_scores[1] if len(top_scores) > 1 else (None, None)
+                top3_name, top3_score = top_scores[2] if len(top_scores) > 2 else (None, None)
+
+                embed = discord.Embed(title="Score Board", description=f"1. <@{top1_name}> {top1_score}\n2. <@{top2_name}> {top2_score}\n3. <@{top3_name}> {top3_score}", color=0x6F8FAF)
+                await ctx.send(embed=embed)
+
         else:
             if success == True:
                 pass
@@ -389,11 +432,16 @@ async def g(ctx, gword: str):
 async def start(ctx):
     embed = discord.Embed(title="Hangman", description="Hangman game is starting in 10 sec. Here is how to play:", color=0x6F8FAF)
     embed.add_field(name="1. Game Start", value="When the game begins, the bot will send a message with the word hidden using 🔵 symbols (e.g., 🔵🔵🔵🔵).", inline=False)
-    embed.add_field(name="2. Guess a Letter:", value="Type a single letter in the chat (e.g., a). If the letter is in the word, it will be revealed in the appropriate positions (e.g., a🔵🔵🔵). If the letter is not in the word, the bot will react with ❌ and show how many lives you have left. **Note:** All messages not containing space will count as a guess", inline=False)
+    embed.add_field(name="2. Guess a Letter:", value="Use !g <letter> to guess a single letter (e.g., !g a). If the letter is in the word, it will be revealed in the appropriate positions (e.g., a🔵🔵🔵). If the letter is not in the word, the bot will react with ❌ and show how many lives you have left. **Note:** All messages not containing space will count as a guess", inline=False)
     embed.add_field(name="Lives:", value="Each player starts with 5 lives. Incorrect guesses will reduce your remaining lives by 1. Once you run out of lives, you can no longer guess.", inline=False)
     embed.add_field(name="Guess the Whole Word:", value="When you think you know the word, type the entire word in lowercase (e.g., word). If you guess correctly, you win the game! If you guess incorrectly, you lose a life.", inline=False)
     embed.add_field(name="Game End:", value="Game ends when someone has guessed the correct word", inline=False)
     await ctx.send(embed=embed)
+
+    current_time = int(time.time())
+    future_time = current_time + 10
+
+    await ctx.send(f"Starting <t:{future_time}:R>")
 
     await asyncio.sleep(10)
 
@@ -722,6 +770,7 @@ async def start(ctx):
 
 @bot.command()
 async def stop(ctx):
+    
     status = "False"
     with open('var/status.txt', 'w') as f:
         f.write(status)
@@ -737,4 +786,3 @@ async def stop(ctx):
             f.write('')
 
 bot.run(token)
-
