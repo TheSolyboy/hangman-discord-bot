@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix='!',intents=intents)
 @bot.event
 async def on_ready():
     status = "False"
-    with open('var/c3.txt', 'w') as f:
+    with open('var/status.txt', 'w') as f:
         f.write(status)
         
     print('Logged in as')
@@ -158,6 +158,8 @@ async def set_word(ctx, word: str):
 @bot.command()
 async def g(ctx, gword: str):
 
+    success = False
+
     with open('var/status.txt', 'r') as f:
         status = f.read()
 
@@ -234,6 +236,27 @@ async def g(ctx, gword: str):
     with open('var/word.txt', 'r') as f:
         word = f.read()
 
+    if c1 == '.':
+        c1 = '🔵'
+    if c2 == '.':
+        c2 = '🔵'
+    if c3 == '.':
+        c3 = '🔵'
+    if c4 == '.':
+        c4 = '🔵'
+    if c5 == '.':
+        c5 = '🔵'
+    if c6 == '.':
+        c6 = '🔵'
+    if c7 == '.':
+        c7 = '🔵'
+    if c8 == '.':
+        c8 = '🔵'
+    if c9 == '.':
+        c9 = '🔵'
+    if c10 == '.':
+        c10 = '🔵'
+
     if status == "True":
         if gword == char1:
             await ctx.message.add_reaction('✔️')
@@ -242,99 +265,121 @@ async def g(ctx, gword: str):
                 f.write(c1)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char2:
+            success = True
+        if gword == char2:
             await ctx.message.add_reaction('✔️')
             c2 = char2
             with open('var/c2.txt', 'w', encoding='utf-8') as f:
                 f.write(c2)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char3:
+            success = True
+        if gword == char3:
             await ctx.message.add_reaction('✔️')
             c3 = char3
             with open('var/c3.txt', 'w', encoding='utf-8') as f:
                 f.write(c3)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char4:
+            success = True
+        if gword == char4:
             await ctx.message.add_reaction('✔️')
             c4 = char4
             with open('var/c4.txt', 'w', encoding='utf-8') as f:
                 f.write(c4)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char5:
+            success = True
+        if gword == char5:
             await ctx.message.add_reaction('✔️')
             c5 = char5
             with open('var/c5.txt', 'w', encoding='utf-8') as f:
                 f.write(c5)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char6:
+            success = True
+        if gword == char6:
             await ctx.message.add_reaction('✔️')
             c6 = char6
             with open('var/c6.txt', 'w', encoding='utf-8') as f:
                 f.write(c6)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char7:
+            success = True
+        if gword == char7:
             await ctx.message.add_reaction('✔️')
             c7 = char7
             with open('var/c7.txt', 'w', encoding='utf-8') as f:
                 f.write(c7)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char8:
+            success = True
+        if gword == char8:
             await ctx.message.add_reaction('✔️')
             c8 = char8
             with open('var/c8.txt', 'w', encoding='utf-8') as f:
                 f.write(c8)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char9:
+            success = True
+        if gword == char9:
             await ctx.message.add_reaction('✔️')
             c9 = char9
             with open('var/c9.txt', 'w', encoding='utf-8') as f:
                 f.write(c9)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == char10:
+            success = True
+        if gword == char10:
             await ctx.message.add_reaction('✔️')
             c10 = char10
             with open('var/c10.txt', 'w', encoding='utf-8') as f:
                 f.write(c10)
             embed3 = discord.Embed(title="Hangman", description=f"You guessed a character correctly\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
             await ctx.reply(embed=embed3)
-        elif gword == word:
+            success = True
+        if gword == word:
             await ctx.message.add_reaction('✔️')
 
             status = "False"
-            with open('var/c3.txt', 'w') as f:
+            with open('var/status.txt', 'w') as f:
                 f.write(status)
+
+            files = glob.glob('var/lives/*')
+            for f in files:
+                os.remove(f)
+            
+            for i in range(1,11):
+                with open(f'var/char{i}.txt', 'w') as f:
+                    f.write('')
         
             user = ctx.author.display_name
             embed4 = discord.Embed(title="Hangman Ended", description=f"{user} guessed the correct word and won, the correct word was {word}", color=0x6F8FAF)
             await ctx.reply(embed=embed4)
+            success = True
         else:
-            await ctx.message.add_reaction('❌')
+            if success == True:
+                pass
+            else:
+                await ctx.message.add_reaction('❌')
             
-            lives = lives - 1
+                lives = lives - 1
 
-            with open(lives_file, 'w') as f:
-                json.dump(lives, f)
+                with open(lives_file, 'w') as f:
+                    json.dump(lives, f)
 
-            if lives == 5:
-                await ctx.message.add_reaction('5️⃣')
-            if lives == 4:
-                await ctx.message.add_reaction('4️⃣')
-            if lives == 3:
-                await ctx.message.add_reaction('3️⃣')
-            if lives == 2:
-                await ctx.message.add_reaction('2️⃣')
-            if lives == 1:
-                await ctx.message.add_reaction('1️⃣')
-            if lives == 0:
-                await ctx.message.add_reaction('💀')
+                if lives == 5:
+                    await ctx.message.add_reaction('5️⃣')
+                if lives == 4:
+                    await ctx.message.add_reaction('4️⃣')
+                if lives == 3:
+                    await ctx.message.add_reaction('3️⃣')
+                if lives == 2:
+                    await ctx.message.add_reaction('2️⃣')
+                if lives == 1:
+                    await ctx.message.add_reaction('1️⃣')
+                if lives == 0:
+                    await ctx.message.add_reaction('💀')
             
 
     else:
@@ -368,10 +413,10 @@ async def start(ctx):
         length = int(f.read())
 
     if length ==2:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
         c3 = ''
@@ -399,13 +444,13 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==3:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
         c4 = ''
@@ -430,16 +475,16 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==4:
-        c1 = 'X'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
         c5 = ''
@@ -461,19 +506,19 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==5:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
         c6 = ''
@@ -492,22 +537,22 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==6:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
-        c6 = 'x'
+        c6 = '.'
         with open('var/c6.txt', 'w', encoding='utf-8') as f:
             f.write(c6)
         c7 = ''
@@ -523,25 +568,25 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==7:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
-        c6 = 'x'
+        c6 = '.'
         with open('var/c6.txt', 'w', encoding='utf-8') as f:
             f.write(c6)
-        c7 = 'x'
+        c7 = '.'
         with open('var/c7.txt', 'w', encoding='utf-8') as f:
             f.write(c7)
         c8 = ''
@@ -554,28 +599,28 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==8:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
-        c6 = 'x'
+        c6 = '.'
         with open('var/c6.txt', 'w', encoding='utf-8') as f:
             f.write(c6)
-        c7 = 'x'
+        c7 = '.'
         with open('var/c7.txt', 'w', encoding='utf-8') as f:
             f.write(c7)
-        c8 = 'x'
+        c8 = '.'
         with open('var/c8.txt', 'w', encoding='utf-8') as f:
             f.write(c8)
         c9 = ''
@@ -585,67 +630,89 @@ async def start(ctx):
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==9:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
-        c6 = 'x'
+        c6 = '.'
         with open('var/c6.txt', 'w', encoding='utf-8') as f:
             f.write(c6)
-        c7 = 'x'
+        c7 = '.'
         with open('var/c7.txt', 'w', encoding='utf-8') as f:
             f.write(c7)
-        c8 = 'x'
+        c8 = '.'
         with open('var/c8.txt', 'w', encoding='utf-8') as f:
             f.write(c8)
-        c9 = 'x'
+        c9 = '.'
         with open('var/c9.txt', 'w', encoding='utf-8') as f:
             f.write(c9)
         c10 = ''
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
     elif length ==10:
-        c1 = 'x'
+        c1 = '.'
         with open('var/c1.txt', 'w', encoding='utf-8') as f:
             f.write(c1)
-        c2 = 'x'
+        c2 = '.'
         with open('var/c2.txt', 'w', encoding='utf-8') as f:
             f.write(c2)
-        c3 = 'x'
+        c3 = '.'
         with open('var/c3.txt', 'w', encoding='utf-8') as f:
             f.write(c3)
-        c4 = 'x'
+        c4 = '.'
         with open('var/c4.txt', 'w', encoding='utf-8') as f:
             f.write(c4)
-        c5 = 'x'
+        c5 = '.'
         with open('var/c5.txt', 'w', encoding='utf-8') as f:
             f.write(c5)
-        c6 = 'x'
+        c6 = '.'
         with open('var/c6.txt', 'w', encoding='utf-8') as f:
             f.write(c6)
-        c7 = 'x'
+        c7 = '.'
         with open('var/c7.txt', 'w', encoding='utf-8') as f:
             f.write(c7)
-        c8 = 'x'
+        c8 = '.'
         with open('var/c8.txt', 'w', encoding='utf-8') as f:
             f.write(c8)
-        c9 = 'x'
+        c9 = '.'
         with open('var/c9.txt', 'w', encoding='utf-8') as f:
             f.write(c9)
-        c10 = 'x'
+        c10 = '.'
         with open('var/c10.txt', 'w', encoding='utf-8') as f:
             f.write(c10)
+
+    if c1 == '.':
+        c1 = '🔵'
+    if c2 == '.':
+        c2 = '🔵'
+    if c3 == '.':
+        c3 = '🔵'
+    if c4 == '.':
+        c4 = '🔵'
+    if c5 == '.':
+        c5 = '🔵'
+    if c6 == '.':
+        c6 = '🔵'
+    if c7 == '.':
+        c7 = '🔵'
+    if c8 == '.':
+        c8 = '🔵'
+    if c9 == '.':
+        c9 = '🔵'
+    if c10 == '.':
+        c10 = '🔵'
+    
 
     embed2 = discord.Embed(title="Hangman", description=f"Guess the word by sending one and one character in this channel\n\n{c1}{c2}{c3}{c4}{c5}{c6}{c7}{c8}{c9}{c10}", color=0x6F8FAF)
     await ctx.send(embed=embed2)
@@ -665,6 +732,9 @@ async def stop(ctx):
     
     await ctx.reply('Game stopped')
 
+    for i in range(1,11):
+        with open(f'var/char{i}.txt', 'w') as f:
+            f.write('')
 
 bot.run(token)
 
